@@ -1,10 +1,11 @@
 from flask import Flask, request, jsonify, send_file
 import asyncio
 import edge_tts
-import uuid
 import os
+import re
+import uuid
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="static")
 
 OUTPUT_DIR = "output"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -19,18 +20,22 @@ def home():
 def speak():
     data = request.get_json()
     text = data.get("text", "")
+    voice = data.get("voice", "zh-TW-HsiaoChenNeural")
 
     if not text:
         return jsonify({"error": "no text"}), 400
 
-    filename = f"{uuid.uuid4()}.mp3"
+    # 🔥 檔名用輸入文字（安全化）
+    safe_text = re.sub(r'[^\w\u4e00-\u9fff]+', '_', text)[:20]
+    filename = f"{safe_text or uuid.uuid4()}.mp3"
     path = os.path.join(OUTPUT_DIR, filename)
 
-    asyncio.run(generate_audio(text, path))
+    asyncio.run(generate_audio(text, path, voice))
 
     return jsonify({
         "ok": True,
-        "audio_url": f"/audio/{filename}"
+        "audio_url": f"/audio/{filename}",
+        "filename": filename
     })
 
 
@@ -39,8 +44,8 @@ def audio(filename):
     return send_file(os.path.join(OUTPUT_DIR, filename))
 
 
-async def generate_audio(text, path):
-    communicate = edge_tts.Communicate(text, "zh-TW-HsiaoChenNeural")
+async def generate_audio(text, path, voice):
+    communicate = edge_tts.Communicate(text, voice)
     await communicate.save(path)
 
 
