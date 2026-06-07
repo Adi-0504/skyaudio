@@ -3,19 +3,24 @@
 <head>
   <meta charset="utf-8">
   <title>空語 TTS</title>
+
   <link rel="stylesheet" href="/static/style.css">
+
+  <!-- 🔥 PWA 必備 -->
+  <link rel="manifest" href="/static/manifest.json">
+
+  <meta name="theme-color" content="#000000">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
 
   <h2>🌐 空語發音器</h2>
 
-  <!-- 文字輸入 -->
   <input id="text" placeholder="輸入：mura qara ꓤa">
 
   <br><br>
 
-  <!-- 音色選擇 -->
   <select id="voice">
     <option value="zh-TW-HsiaoChenNeural">女聲（台灣）</option>
     <option value="zh-TW-YunJheNeural">男聲（台灣）</option>
@@ -31,6 +36,13 @@
   <audio id="player" controls></audio>
 
   <script src="/static/app.js"></script>
+
+  <!-- 🔥 service worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/static/sw.js');
+    }
+  </script>
 
 </body>
 </html>
