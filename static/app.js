@@ -1,46 +1,24 @@
-let lastAudioUrl = "";
-let lastFileName = "";
+let lastUrl = "";
+let lastFile = "";
 
 async function speak() {
     const text = document.getElementById("text").value;
-    const voice = document.getElementById("voice").value;
+    const island = document.getElementById("island").value;
 
-    if (!text) {
-        alert("請輸入文字");
-        return;
-    }
+    if (!text) return;
 
     const res = await fetch("/speak", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ text, voice })
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ text, island })
     });
 
     const data = await res.json();
 
-    if (!data.audio_url) {
-        alert("生成失敗");
-        return;
-    }
-
-    lastAudioUrl = data.audio_url;
-    lastFileName = data.filename;
+    lastUrl = data.audio_url;
+    lastFile = data.filename;
 
     const player = document.getElementById("player");
-    player.src = lastAudioUrl;
+    player.src = lastUrl;
     player.play();
-}
-
-function downloadAudio() {
-    if (!lastAudioUrl) {
-        alert("還沒有音檔");
-        return;
-    }
-
-    const a = document.createElement("a");
-    a.href = lastAudioUrl;
-    a.download = lastFileName;
-    a.click();
 }

@@ -10,6 +10,13 @@ app = Flask(__name__, static_folder="static")
 OUTPUT_DIR = "output"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
+ISLAND_VOICES = {
+    "forest": {"voice": "id-ID-ArdiNeural"},
+    "plain": {"voice": "es-ES-AlvaroNeural"},
+    "mine": {"voice": "hi-IN-MadhurNeural"},
+    "beach": {"voice": "fil-PH-AngeloNeural"}
+}
+
 
 @app.route("/")
 def home():
@@ -21,25 +28,20 @@ def speak():
     data = request.get_json()
 
     text = data.get("text", "")
-    voice = data.get("voice", "zh-TW-HsiaoChenNeural")
+    island = data.get("island", "forest")
 
+    voice = ISLAND_VOICES.get(island, ISLAND_VOICES["forest"])["voice"]
+
+    print("ISLAND =", island)
     print("VOICE =", voice)
 
-    if not text:
-        return jsonify({"error": "no text"}), 400
-
-    # 安全檔名
     safe_text = re.sub(r"[^\w\u4e00-\u9fff]+", "_", text)[:20]
-
-    # 每次都產生不同檔名（避免快取）
     filename = f"{safe_text}_{uuid.uuid4().hex[:8]}.mp3"
-
     path = os.path.join(OUTPUT_DIR, filename)
 
     asyncio.run(generate_audio(text, path, voice))
 
     return jsonify({
-        "ok": True,
         "audio_url": f"/audio/{filename}",
         "filename": filename
     })
@@ -48,15 +50,7 @@ def speak():
 @app.route("/audio/<filename>")
 def audio(filename):
     path = os.path.join(OUTPUT_DIR, filename)
-
-    if not os.path.exists(path):
-        return jsonify({"error": "file not found"}), 404
-
-    return send_file(
-        path,
-        mimetype="audio/mpeg",
-        as_attachment=False
-    )
+    return send_file(path, mimetype="audio/mpeg")
 
 
 async def generate_audio(text, path, voice):
