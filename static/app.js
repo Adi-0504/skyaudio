@@ -1,6 +1,3 @@
-let lastUrl = "";
-let lastFile = "";
-
 async function speak() {
     const text = document.getElementById("text").value;
     const island = document.getElementById("island").value;
@@ -15,10 +12,7 @@ async function speak() {
 
     const data = await res.json();
 
-    lastUrl = data.audio_url;
-    lastFile = data.filename;
-
     const player = document.getElementById("player");
-    player.src = lastUrl;
+    player.src = data.audio_url;
     player.play();
 }

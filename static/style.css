@@ -18,7 +18,6 @@ body {
   background: #e6e6e6;
   border-radius: 14px;
   padding: 18px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
 }
 
 h2 {
@@ -36,7 +35,7 @@ textarea {
 
 select {
   width: 100%;
-  margin-top: 12px;
+  margin-top: 10px;
   padding: 10px;
   border-radius: 10px;
   border: none;
@@ -44,8 +43,7 @@ select {
 
 .btns {
   display: flex;
-  gap: 10px;
-  margin-top: 14px;
+  margin-top: 12px;
 }
 
 button {
@@ -59,15 +57,5 @@ button {
 
 audio {
   width: 100%;
-  margin-top: 14px;
-}
-
-@media (max-width: 480px) {
-  .card {
-    width: 94%;
-  }
-
-  textarea {
-    height: 160px;
-  }
+  margin-top: 12px;
 }
