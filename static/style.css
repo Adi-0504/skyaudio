@@ -1,32 +1,79 @@
 body {
-  font-family: Arial;
-  background: #0f0f14;
-  color: white;
+  margin: 0;
+  font-family: "Noto Sans TC", sans-serif;
+  background: #d9d9d9;
+}
+
+/* 🔲 外層卡片 */
+.card {
+  width: 380px;
+  background: #e6e6e6;
+  border-radius: 12px;
+  padding: 20px;
+  margin: auto;
+  margin-top: 10vh;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* 🟢 標題 */
+h2 {
   text-align: center;
-  margin-top: 120px;
+  color: #355E3B;
+  font-size: 26px;
+  margin-bottom: 16px;
 }
 
-input {
+/* 📝 輸入框 */
+textarea {
+  width: 100%;
+  height: 200px;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 16px;
+  resize: none;
+  outline: none;
+  box-sizing: border-box;
+}
+
+/* 🎛️ 下拉選單 */
+select {
+  width: 100%;
+  margin-top: 12px;
   padding: 10px;
-  width: 280px;
   border-radius: 8px;
   border: none;
+  font-size: 14px;
+  box-sizing: border-box;
 }
 
+/* 🔘 按鈕區 */
+.btns {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+/* 🔵 按鈕 */
 button {
-  padding: 10px 15px;
-  margin-left: 10px;
-  border-radius: 8px;
+  flex: 1;
+  padding: 12px;
   border: none;
-  background: #38bdf8;
+  border-radius: 999px;
+  background: #556B8D;
+  color: white;
+  font-size: 15px;
   cursor: pointer;
+  transition: 0.2s;
 }
 
 button:hover {
-  background: #0ea5e9;
+  transform: translateY(-1px);
+  opacity: 0.9;
 }
 
+/* 🔊 播放器 */
 audio {
-  margin-top: 20px;
-  width: 320px;
+  width: 100%;
+  margin-top: 14px;
 }

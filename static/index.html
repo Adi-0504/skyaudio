@@ -2,47 +2,110 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>空語 TTS</title>
+  <title>Skylang Voice</title>
 
   <link rel="stylesheet" href="/static/style.css">
-
-  <!-- 🔥 PWA 必備 -->
   <link rel="manifest" href="/static/manifest.json">
 
-  <meta name="theme-color" content="#000000">
+  <meta name="theme-color" content="#d9d9d9">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body{
+      margin:0;
+      background:#d9d9d9;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+      font-family: sans-serif;
+    }
+
+    .card{
+      width:380px;
+      background:#e6e6e6;
+      border-radius:12px;
+      padding:20px;
+      box-shadow:0 6px 20px rgba(0,0,0,0.1);
+    }
+
+    h2{
+      text-align:center;
+      color:#355E3B;
+      margin-bottom:16px;
+    }
+
+    textarea{
+      width:100%;
+      height:200px;
+      border:none;
+      border-radius:8px;
+      padding:12px;
+      font-size:16px;
+      resize:none;
+      outline:none;
+    }
+
+    select{
+      width:100%;
+      margin-top:12px;
+      padding:10px;
+      border-radius:8px;
+      border:none;
+    }
+
+    .btns{
+      display:flex;
+      justify-content:space-between;
+      margin-top:16px;
+      gap:10px;
+    }
+
+    button{
+      flex:1;
+      padding:12px;
+      border:none;
+      border-radius:999px;
+      background:#556B8D;
+      color:white;
+      cursor:pointer;
+      font-size:16px;
+    }
+
+    button:hover{
+      opacity:0.9;
+    }
+
+    audio{
+      width:100%;
+      margin-top:12px;
+    }
+  </style>
 </head>
 
 <body>
 
-  <h2>🌐 空語發音器</h2>
+<div class="card">
 
-  <input id="text" placeholder="輸入：mura qara ꓤa">
+  <h2>Skylang Voice</h2>
 
-  <br><br>
+  <textarea id="text" placeholder="輸入框"></textarea>
 
   <select id="voice">
-    <option value="zh-TW-HsiaoChenNeural">女聲（台灣）</option>
-    <option value="zh-TW-YunJheNeural">男聲（台灣）</option>
+    <option value="zh-TW-HsiaoChenNeural">台灣女聲</option>
+    <option value="zh-TW-YunJheNeural">台灣男聲</option>
   </select>
 
-  <br><br>
-
-  <button onclick="speak()">播放</button>
-  <button onclick="downloadAudio()">下載</button>
-
-  <br><br>
+  <div class="btns">
+    <button onclick="downloadAudio()">下載</button>
+    <button onclick="speak()">播放 ▶</button>
+  </div>
 
   <audio id="player" controls></audio>
 
-  <script src="/static/app.js"></script>
+</div>
 
-  <!-- 🔥 service worker -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/static/sw.js');
-    }
-  </script>
+<script src="/static/app.js"></script>
 
 </body>
 </html>

@@ -19,15 +19,21 @@ def home():
 @app.route("/speak", methods=["POST"])
 def speak():
     data = request.get_json()
+
     text = data.get("text", "")
     voice = data.get("voice", "zh-TW-HsiaoChenNeural")
+
+    print("VOICE =", voice)
 
     if not text:
         return jsonify({"error": "no text"}), 400
 
-    # 🔥 檔名用輸入文字（安全化）
-    safe_text = re.sub(r'[^\w\u4e00-\u9fff]+', '_', text)[:20]
-    filename = f"{safe_text or uuid.uuid4()}.mp3"
+    # 安全檔名
+    safe_text = re.sub(r"[^\w\u4e00-\u9fff]+", "_", text)[:20]
+
+    # 每次都產生不同檔名（避免快取）
+    filename = f"{safe_text}_{uuid.uuid4().hex[:8]}.mp3"
+
     path = os.path.join(OUTPUT_DIR, filename)
 
     asyncio.run(generate_audio(text, path, voice))
@@ -41,7 +47,16 @@ def speak():
 
 @app.route("/audio/<filename>")
 def audio(filename):
-    return send_file(os.path.join(OUTPUT_DIR, filename))
+    path = os.path.join(OUTPUT_DIR, filename)
+
+    if not os.path.exists(path):
+        return jsonify({"error": "file not found"}), 404
+
+    return send_file(
+        path,
+        mimetype="audio/mpeg",
+        as_attachment=False
+    )
 
 
 async def generate_audio(text, path, voice):
