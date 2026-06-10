@@ -1,61 +1,96 @@
-* {
-  box-sizing: border-box;
-}
-
 body {
-  margin: 0;
-  font-family: sans-serif;
-  background: #d9d9d9;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: #F8F9FA;
 }
 
-.card {
-  width: 90%;
-  max-width: 420px;
-  background: #e6e6e6;
-  border-radius: 14px;
-  padding: 18px;
+.container {
+    padding: 32px;
+    max-width: 900px;
+    margin: auto;
 }
 
-h2 {
-  text-align: center;
-  color: #355E3B;
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.title {
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.menu-btn {
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.menu {
+    position: absolute;
+    right: 0;
+    top: 50px;
+    width: 180px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+.menu div {
+    padding: 12px;
+    cursor: pointer;
+}
+
+.menu div:hover {
+    background: #eee;
+}
+
+.hidden {
+    display: none;
 }
 
 textarea {
-  width: 100%;
-  height: 180px;
-  border: none;
-  border-radius: 10px;
-  padding: 12px;
+    width: 100%;
+    height: 260px;
+    font-size: 20px;
+    padding: 16px;
+    margin-top: 20px;
+    border-radius: 16px;
 }
 
-select {
-  width: 100%;
-  margin-top: 10px;
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
+.islands {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 20px;
 }
 
-.btns {
-  display: flex;
-  margin-top: 12px;
+.island {
+    height: 70px;
+    font-size: 18px;
+    border: none;
+    border-radius: 16px;
+    color: white;
 }
 
-button {
-  flex: 1;
-  padding: 12px;
-  border: none;
-  border-radius: 999px;
-  background: #556B8D;
-  color: white;
+.forest { background:#4F7A5A; }
+.plain { background:#C9A64B; }
+.mine { background:#6E6A67; }
+.beach { background:#4FA3C8; }
+
+.actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
 }
 
-audio {
-  width: 100%;
-  margin-top: 12px;
+.actions button {
+    flex: 1;
+    height: 60px;
+    font-size: 18px;
+    border-radius: 16px;
+    border: none;
+    background: #556B8D;
+    color: white;
 }

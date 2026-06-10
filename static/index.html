@@ -1,38 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Skylang Voice</title>
+<meta charset="utf-8">
+<title>Skylang Voice</title>
 
-  <link rel="stylesheet" href="/static/style.css">
+<link rel="stylesheet" href="/static/style.css">
+<link rel="manifest" href="/static/manifest.json">
 
-  <!-- 🔥 PWA -->
-  <link rel="manifest" href="/static/manifest.json">
+<link rel="icon" href="/static/icon.png">
+<link rel="apple-touch-icon" href="/static/icon.png">
 
-  <!-- 🔥 icon 修復 -->
-  <link rel="icon" href="/static/icon.png">
-  <link rel="apple-touch-icon" href="/static/icon.png">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
 
-<div class="card">
+<div class="container">
 
-  <h2>Skylang Voice</h2>
+  <!-- topbar -->
+  <div class="topbar">
+    <div class="title">Skylang Voice</div>
+    <div class="menu-btn" onclick="toggleMenu()">⋯</div>
 
+    <div id="menu" class="menu hidden">
+      <div onclick="showRecent()">最近使用</div>
+      <div onclick="showFavorites()">收藏詞彙</div>
+      <hr>
+      <div onclick="clearAll()">清除紀錄</div>
+    </div>
+  </div>
+
+  <!-- input -->
   <textarea id="text" placeholder="輸入文字..."></textarea>
 
-  <select id="island">
-    <option value="forest">🌲 森林島（印尼語）</option>
-    <option value="plain">🌾 平原島（西班牙語）</option>
-    <option value="mine">⛏ 礦山島（印地語）</option>
-    <option value="beach">🏖 沙灘島（菲律賓語）</option>
-  </select>
+  <!-- islands -->
+  <div class="islands">
+    <button class="island forest" onclick="setIsland('forest')">森林島</button>
+    <button class="island plain" onclick="setIsland('plain')">平原島</button>
+    <button class="island mine" onclick="setIsland('mine')">礦山島</button>
+    <button class="island beach" onclick="setIsland('beach')">沙灘島</button>
+  </div>
 
-  <div class="btns">
-    <button onclick="speak()">播放 ▶</button>
+  <!-- actions -->
+  <div class="actions">
+    <button onclick="speak()">播放</button>
+    <button onclick="downloadAudio()">下載</button>
+    <button onclick="toggleFavorite()">收藏</button>
   </div>
 
   <audio id="player" controls></audio>

@@ -10,7 +10,6 @@ app = Flask(__name__, static_folder="static")
 OUTPUT_DIR = "output"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-# 🌍 四島語音
 ISLAND_VOICES = {
     "forest": "id-ID-ArdiNeural",
     "plain": "es-ES-AlvaroNeural",
@@ -49,7 +48,7 @@ def speak():
 def audio(filename):
     return send_file(os.path.join(OUTPUT_DIR, filename), mimetype="audio/mpeg")
 
-# 🧠 解決 favicon 404（重點🔥）
+# favicon 防 404
 @app.route('/favicon.ico')
 def favicon():
     return send_file('static/icon.png')
