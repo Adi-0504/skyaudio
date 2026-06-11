@@ -17,38 +17,25 @@
 
 <div class="container">
 
-  <!-- topbar -->
   <div class="topbar">
     <div class="title">Skylang Voice</div>
-    <div class="menu-btn" onclick="toggleMenu()">⋯</div>
-
-    <div id="menu" class="menu hidden">
-      <div onclick="showRecent()">最近使用</div>
-      <div onclick="showFavorites()">收藏詞彙</div>
-      <hr>
-      <div onclick="clearAll()">清除紀錄</div>
-    </div>
   </div>
 
-  <!-- input -->
   <textarea id="text" placeholder="輸入文字..."></textarea>
 
-  <!-- islands -->
   <div class="islands">
-    <button class="island forest" onclick="setIsland('forest')">森林島</button>
-    <button class="island plain" onclick="setIsland('plain')">平原島</button>
-    <button class="island mine" onclick="setIsland('mine')">礦山島</button>
-    <button class="island beach" onclick="setIsland('beach')">沙灘島</button>
+    <button onclick="setIsland('forest')">森林島</button>
+    <button onclick="setIsland('plain')">平原島</button>
+    <button onclick="setIsland('mine')">礦山島</button>
+    <button onclick="setIsland('beach')">沙灘島</button>
   </div>
 
-  <!-- actions -->
   <div class="actions">
-    <button onclick="speak()">播放</button>
-    <button onclick="downloadAudio()">下載</button>
-    <button onclick="toggleFavorite()">收藏</button>
+    <button id="playBtn" onclick="speak()">播放</button>
   </div>
 
-  <audio id="player" controls></audio>
+  <!-- 🔥 完全隱藏播放器 -->
+  <audio id="player" hidden></audio>
 
 </div>
 

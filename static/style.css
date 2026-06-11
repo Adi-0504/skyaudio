@@ -1,96 +1,154 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
-    font-family: "Segoe UI", sans-serif;
-    background: #F8F9FA;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #F6F7F9;
+    color: #1C1C1E;
 }
 
+/* 🌍 主容器（全螢幕 + 居中） */
 .container {
-    padding: 32px;
-    max-width: 900px;
-    margin: auto;
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 24px;
 }
 
+/* 🧭 標題 */
 .topbar {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-    position: relative;
+    margin-bottom: 24px;
 }
 
 .title {
-    font-size: 36px;
-    font-weight: 600;
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
 }
 
-.menu-btn {
-    font-size: 28px;
-    cursor: pointer;
-}
-
-.menu {
-    position: absolute;
-    right: 0;
-    top: 50px;
-    width: 180px;
+/* ✏️ 輸入框 */
+textarea {
+    width: 100%;
+    height: 320px;
+    padding: 20px;
+    font-size: 22px;
+    border-radius: 20px;
+    border: 1px solid #E5E5EA;
     background: white;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    outline: none;
+    resize: none;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
 }
 
-.menu div {
-    padding: 12px;
+textarea:focus {
+    border-color: #4A90E2;
+}
+
+/* 🌍 四島區 */
+.islands {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 20px;
+}
+
+/* 🏝️ 基礎島按鈕 */
+.islands button {
+    height: 76px;
+    border: none;
+    border-radius: 18px;
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
     cursor: pointer;
+    transition: transform 0.1s ease, opacity 0.2s ease;
 }
 
-.menu div:hover {
-    background: #eee;
+.islands button:active {
+    transform: scale(0.98);
+    opacity: 0.9;
 }
 
-.hidden {
+/* 🌲 森林島 */
+.islands button:nth-child(1) {
+    background: #2E6F4E;
+}
+
+/* 🌾 平原島 */
+.islands button:nth-child(2) {
+    background: #C9A64B;
+}
+
+/* ⛏ 礦山島 */
+.islands button:nth-child(3) {
+    background: #5E5A57;
+}
+
+/* 🏖 沙灘島 */
+.islands button:nth-child(4) {
+    background: #3C9DCB;
+}
+
+/* ▶ 播放按鈕 */
+.actions {
+    margin-top: 28px;
+}
+
+#playBtn {
+    width: 100%;
+    height: 72px;
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #4A90E2, #357ABD);
+    color: white;
+    font-size: 22px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(74,144,226,0.25);
+    transition: transform 0.1s ease, opacity 0.2s ease;
+}
+
+#playBtn:active {
+    transform: scale(0.98);
+}
+
+#playBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* 🎧 隱藏 audio */
+audio {
     display: none;
 }
 
-textarea {
-    width: 100%;
-    height: 260px;
-    font-size: 20px;
-    padding: 16px;
-    margin-top: 20px;
-    border-radius: 16px;
-}
+/* 📱 響應式 */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px 16px;
+    }
 
-.islands {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-top: 20px;
-}
+    .title {
+        font-size: 32px;
+    }
 
-.island {
-    height: 70px;
-    font-size: 18px;
-    border: none;
-    border-radius: 16px;
-    color: white;
-}
+    textarea {
+        height: 240px;
+        font-size: 18px;
+    }
 
-.forest { background:#4F7A5A; }
-.plain { background:#C9A64B; }
-.mine { background:#6E6A67; }
-.beach { background:#4FA3C8; }
+    .islands button {
+        height: 64px;
+        font-size: 16px;
+    }
 
-.actions {
-    display: flex;
-    gap: 12px;
-    margin-top: 20px;
-}
-
-.actions button {
-    flex: 1;
-    height: 60px;
-    font-size: 18px;
-    border-radius: 16px;
-    border: none;
-    background: #556B8D;
-    color: white;
+    #playBtn {
+        height: 64px;
+        font-size: 18px;
+    }
 }
