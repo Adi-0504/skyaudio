@@ -2,42 +2,51 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Skylang Voice</title>
+<title>Skylang Voice v35</title>
 
 <link rel="stylesheet" href="/static/style.css">
 <link rel="manifest" href="/static/manifest.json">
 
 <link rel="icon" href="/static/icon.png">
-<link rel="apple-touch-icon" href="/static/icon.png">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
 
-<div class="container">
-
-  <div class="topbar">
+<!-- 🌙 top bar -->
+<div class="topbar">
     <div class="title">Skylang Voice</div>
-  </div>
+    <div class="menu" onclick="toggleMenu()">⋯</div>
+</div>
 
-  <textarea id="text" placeholder="輸入文字..."></textarea>
+<!-- 📦 dropdown -->
+<div id="dropdown" class="dropdown hidden">
+    <div onclick="openFavorites()">收藏詞彙</div>
+    <div onclick="openRecent()">最近使用</div>
+</div>
 
-  <div class="islands">
+<!-- ✏️ input -->
+<textarea id="text" placeholder="輸入語音內容..."></textarea>
+
+<!-- 🌍 islands -->
+<div class="islands">
     <button onclick="setIsland('forest')">森林島</button>
     <button onclick="setIsland('plain')">平原島</button>
     <button onclick="setIsland('mine')">礦山島</button>
     <button onclick="setIsland('beach')">沙灘島</button>
-  </div>
+</div>
 
-  <div class="actions">
+<!-- 🎧 actions -->
+<div class="actions">
+
     <button id="playBtn" onclick="speak()">播放</button>
-  </div>
 
-  <!-- 🔥 完全隱藏播放器 -->
-  <audio id="player" hidden></audio>
+    <button onclick="downloadAudio()">下載</button>
 
 </div>
+
+<!-- 🔇 hidden audio -->
+<audio id="player"></audio>
 
 <script src="/static/app.js"></script>
 

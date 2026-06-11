@@ -2,25 +2,24 @@ let lastAudioUrl = "";
 let lastFileName = "";
 let currentIsland = "forest";
 
+function toggleMenu() {
+    const menu = document.getElementById("dropdown");
+    menu.classList.toggle("hidden");
+}
+
 async function speak() {
     const text = document.getElementById("text").value;
     const btn = document.getElementById("playBtn");
 
     if (!text) return;
 
-    // 🎧 播放中狀態
     btn.innerText = "播放中…";
     btn.disabled = true;
 
     const res = await fetch("/speak", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            text,
-            island: currentIsland
-        })
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ text, island: currentIsland })
     });
 
     const data = await res.json();
@@ -33,24 +32,29 @@ async function speak() {
 
     await player.play();
 
-    addRecent(text);
-
-    // 🔥 播完恢復
     player.onended = () => {
         btn.innerText = "播放";
         btn.disabled = false;
     };
 }
 
-// 🌍 切島
-function setIsland(island) {
-    currentIsland = island;
+function downloadAudio() {
+    if (!lastAudioUrl) return;
+
+    const a = document.createElement("a");
+    a.href = lastAudioUrl;
+    a.download = lastFileName;
+    a.click();
 }
 
-// 📜 最近使用
-function addRecent(text) {
-    let recent = JSON.parse(localStorage.getItem("recent")) || [];
-    recent.unshift(text);
-    recent = [...new Set(recent)].slice(0, 10);
-    localStorage.setItem("recent", JSON.stringify(recent));
+function setIsland(i) {
+    currentIsland = i;
+}
+
+function openFavorites() {
+    alert("收藏詞彙（v35 placeholder）");
+}
+
+function openRecent() {
+    alert("最近使用（v35 placeholder）");
 }

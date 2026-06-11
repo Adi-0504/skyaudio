@@ -4,151 +4,129 @@
 
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background: #F6F7F9;
-    color: #1C1C1E;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+    background: #F4F6F8;
+    color: #111;
 }
 
-/* 🌍 主容器（全螢幕 + 居中） */
-.container {
-    width: 100%;
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 40px 24px;
+/* 🌍 全螢幕 App */
+body, html {
+    height: 100%;
 }
 
-/* 🧭 標題 */
+/* 🧭 top bar */
 .topbar {
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin-bottom: 24px;
-}
-
-.title {
-    font-size: 40px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-}
-
-/* ✏️ 輸入框 */
-textarea {
-    width: 100%;
-    height: 320px;
+    justify-content: space-between;
     padding: 20px;
-    font-size: 22px;
-    border-radius: 20px;
-    border: 1px solid #E5E5EA;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.menu {
+    font-size: 30px;
+    cursor: pointer;
+}
+
+/* 📦 dropdown */
+.dropdown {
+    position: absolute;
+    top: 60px;
+    right: 20px;
     background: white;
-    outline: none;
-    resize: none;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    overflow: hidden;
+    z-index: 100;
 }
 
-textarea:focus {
-    border-color: #4A90E2;
+.dropdown div {
+    padding: 12px 18px;
+    cursor: pointer;
 }
 
-/* 🌍 四島區 */
+.dropdown div:hover {
+    background: #eee;
+}
+
+.hidden {
+    display: none;
+}
+
+/* ✏️ input */
+textarea {
+    width: calc(100% - 40px);
+    margin: 0 20px;
+    height: 280px;
+    font-size: 20px;
+    padding: 16px;
+    border-radius: 16px;
+    border: 1px solid #ddd;
+    background: white;
+}
+
+/* 🌍 islands */
 .islands {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-    margin-top: 20px;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 20px;
 }
 
-/* 🏝️ 基礎島按鈕 */
 .islands button {
-    height: 76px;
+    height: 70px;
     border: none;
-    border-radius: 18px;
-    font-size: 18px;
-    font-weight: 600;
+    border-radius: 16px;
     color: white;
-    cursor: pointer;
-    transition: transform 0.1s ease, opacity 0.2s ease;
+    font-size: 18px;
 }
 
-.islands button:active {
-    transform: scale(0.98);
-    opacity: 0.9;
-}
+/* 🌲 森林 */
+.islands button:nth-child(1){background:#2E6F4E;}
+/* 🌾 平原 */
+.islands button:nth-child(2){background:#C9A64B;}
+/* ⛏ 礦山 */
+.islands button:nth-child(3){background:#5E5A57;}
+/* 🏖 沙灘 */
+.islands button:nth-child(4){background:#3C9DCB;}
 
-/* 🌲 森林島 */
-.islands button:nth-child(1) {
-    background: #2E6F4E;
-}
-
-/* 🌾 平原島 */
-.islands button:nth-child(2) {
-    background: #C9A64B;
-}
-
-/* ⛏ 礦山島 */
-.islands button:nth-child(3) {
-    background: #5E5A57;
-}
-
-/* 🏖 沙灘島 */
-.islands button:nth-child(4) {
-    background: #3C9DCB;
-}
-
-/* ▶ 播放按鈕 */
+/* 🎧 actions */
 .actions {
-    margin-top: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 20px;
 }
 
 #playBtn {
-    width: 100%;
-    height: 72px;
+    height: 70px;
     border: none;
-    border-radius: 20px;
-    background: linear-gradient(135deg, #4A90E2, #357ABD);
+    border-radius: 16px;
+    background: #4A90E2;
     color: white;
-    font-size: 22px;
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: 0 6px 20px rgba(74,144,226,0.25);
-    transition: transform 0.1s ease, opacity 0.2s ease;
+    font-size: 20px;
 }
 
-#playBtn:active {
-    transform: scale(0.98);
+.actions button:nth-child(2) {
+    height: 60px;
+    border-radius: 14px;
+    border: none;
+    background: #ddd;
 }
 
-#playBtn:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-/* 🎧 隱藏 audio */
+/* 🎧 hidden audio */
 audio {
     display: none;
 }
 
-/* 📱 響應式 */
+/* 📱 responsive */
 @media (max-width: 600px) {
-    .container {
-        padding: 20px 16px;
-    }
-
-    .title {
-        font-size: 32px;
-    }
-
     textarea {
-        height: 240px;
+        height: 200px;
         font-size: 18px;
     }
 
-    .islands button {
-        height: 64px;
-        font-size: 16px;
-    }
-
-    #playBtn {
-        height: 64px;
-        font-size: 18px;
+    .topbar {
+        font-size: 22px;
     }
 }
